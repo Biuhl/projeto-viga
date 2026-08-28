@@ -1,161 +1,145 @@
 import ContactForm from "@/components/ContactForm";
+import SpaceBackground from "@/components/spaceBackground";
+import { Poppins } from "next/font/google";
+
+const poppins = Poppins({
+  subsets: ["latin"],
+  weight: ["800", "900"],
+});
+
 
 export default function Home() {
   return (
-    <div className="bg-slate-950 text-slate-100">
-      {/* ===== HEADER / HERO (estilo tema padrão do Next.js) ===== */}
-      <header
-        id="hero"
-        className="min-h-screen flex flex-col justify-center items-center px-6 relative overflow-hidden bg-black text-white font-sans"
-      >
-        <div className="relative z-10 max-w-2xl mx-auto flex flex-col items-center gap-8 text-center">
-          {/* "Wordmark" no lugar do logo Next.js */}
-          <div className="text-7xl sm:text-xl font-bold tracking-tight">
-            VIGA
-          </div>
+    <div className="relative min-h-screen text-slate-100 selection:bg-indigo-500 selection:text-white">
+      {/* Fundo de estrelas fixo em toda a tela */}
+      <SpaceBackground />
 
-          <ol className="font-mono text-sm sm:text-base text-left list-decimal list-inside leading-relaxed text-white/90 space-y-1">
+      {/* Conteúdo da página com z-index acima do canvas */}
+      <div className="relative z-10">
+        {/* ===== HEADER / HERO ===== */}
+        <header
+          id="hero"
+          className="h-screen flex flex-col justify-center items-center px-6 text-white font-sans"
+        >
+          <div className="max-w-3xl mx-auto flex flex-col items-center gap-10 text-center">
+            {/* Wordmark no estilo original */}
+            <div className="text-8xl sm:text-9xl font-bold tracking-tight">
+              VIGA
+            </div>
+
+            <ol className="font-mono text-lg sm:text-2xl text-left list-decimal list-inside leading-relaxed text-white/90 space-y-1">
               PLATAFORMA DE{" "}
-              <span className="bg-white/10 px-1.5 py-0.5 rounded font-mono">
+              <span className="bg-white/10 px-2 py-1 rounded font-mono">
                 GESTÃO OPERACIONAL
-              </span>        
-          </ol>
+              </span>
+            </ol>
 
-          <div className="flex flex-col sm:flex-row items-center gap-4 pt-2">
-            <a
-              href="#contact"
-              className="rounded-full bg-white text-black px-6 py-3 text-sm sm:text-base font-medium hover:bg-white/90 transition-colors"
-            >
-              Solicitar acesso
-            </a>
-            <a
-              href="#about"
-              className="rounded-full border border-white/20 px-6 py-3 text-sm sm:text-base font-medium hover:bg-white/10 transition-colors"
-            >
-              Conhecer o projeto
-            </a>
+            <div className="flex flex-col sm:flex-row items-center gap-5 pt-3">
+              <a
+                href="#contact"
+                className="rounded-lg bg-white text-black px-7 py-3.5 text-base sm:text-lg font-medium hover:bg-green-500 hover:text-white transition-colors"
+              >
+                SOLICITAR ACESSO!
+              </a>
+              <a
+                href="#about"
+                className="rounded-lg border border-white/20 px-7 py-3.5 text-base sm:text-lg font-medium hover:bg-white hover:text-black transition-colors"
+              >
+                CONHECER O PROJETO...
+              </a>
+            </div>
           </div>
+        </header>
+        {/* ===== SEÇÃO DE IMPACTO*/}
+        <section
+  id="about"
+  className="min-h-screen flex flex-col justify-center px-6 sm:px-12 lg:px-20 py-24 text-white"
+>
+  <div className="w-full max-w-6xl mx-auto space-y-16">
+    
+    {/* Cabeçalho discreto */}
+    <div className="space-y-2 text-left">
+      <span className="text-xs sm:text-sm font-bold uppercase tracking-widest text-emerald-400 font-mono">
+        Pilar Operacional
+      </span>
+      <h3 className="text-xl sm:text-2xl font-bold text-slate-200 tracking-tight">
+        Domínio Total da Operação
+      </h3>
+    </div>
+
+    {/* Grid: Frases mais limpas e espaçadas + Imagem */}
+    <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+      
+      {/* Lado Esquerdo: Frases mais sutis, menores e com bastante respiro */}
+      <div className={`lg:col-span-7 space-y-10 sm:space-y-12 text-left ${poppins.className}`}>
+        
+        <div className="space-y-1">
+          <span className="text-xs font-mono text-emerald-400/80 uppercase tracking-wider">01</span>
+          <h1 className="text-xl sm:text-4xl lg:text-6xl font-bold text-white tracking-tight leading-snug select-none cursor-default hover:translate-x-2 transition-transform duration-300">
+            Estatísticas operacionais
+          </h1>
         </div>
-      </header>
 
-      {/* ===== ABOUT ===== */}
-      <section id="about" className="px-6 py-24 bg-slate-950">
-        <div className="max-w-5xl mx-auto space-y-16">
-          <div className="text-center space-y-3 max-w-2xl mx-auto">
-            <span className="text-xs sm:text-sm font-bold uppercase tracking-widest text-blue-400">
-              Sobre o Projeto
-            </span>
-            <h2 className="text-3xl sm:text-4xl font-black">
-              Objetivo &amp; Proposta
-            </h2>
-          </div>
+        <div className="space-y-1">
+          <span className="text-xs font-mono text-blue-400/80 uppercase tracking-wider">02</span>
+          <h1 className="text-xl sm:text-4xl lg:text-6xl font-bold text-white tracking-tight leading-snug select-none cursor-default hover:translate-x-2 transition-transform duration-300">
+            Passagem de Turnos
+          </h1>
+        </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div className="bg-slate-900/60 border border-slate-800 p-8 rounded-2xl space-y-3">
-              <h3 className="font-bold text-lg text-white">Objetivo</h3>
-              <p className="text-slate-300 text-sm leading-relaxed">
-                Desenvolver uma plataforma para centralizar, organizar e
-                acompanhar as informações da rotina operacional,
-                proporcionando maior agilidade na identificação de
-                problemas, acompanhamento de atividades e tomada de
-                decisões.
+        <div className="space-y-1">
+          <span className="text-xs font-mono text-purple-400/80 uppercase tracking-wider">03</span>
+          <h1 className="text-xl sm:text-4xl lg:text-6xl font-bold text-white tracking-tight leading-snug select-none cursor-default hover:translate-x-2 transition-transform duration-300">
+            Tomada de decisão assertiva
+          </h1>
+        </div>
+
+      </div>
+
+      {/* Lado Direito: Imagem corporativa proporcional */}
+      <div className="lg:col-span-5 flex justify-center items-center">
+        <a
+          href="#"
+          aria-label="Ambiente Corporativo VIGA"
+          className="group flex w-full max-w-[420px] aspect-[4/3] items-center justify-center overflow-hidden rounded-2xl border border-white/15 bg-neutral-900/40 backdrop-blur-2xl transition-all duration-300 hover:border-white/40 shadow-2xl"
+        >
+          <img
+            src="/corporate-desk.jpeg"
+            alt="Ambiente Corporativo VIGA"
+            className="w-full h-full object-cover opacity-90 transition-opacity duration-300 group-hover:opacity-100"
+          />
+        </a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+        {/* ===== CONTACT / FOOTER ===== */}
+        <section
+          id="contact"
+          className="px-6 py-24 bg-slate-950/80 backdrop-blur-sm border-t border-slate-800"
+        >
+          <div className="max-w-xl mx-auto space-y-8">
+            <div className="text-center space-y-2">
+              <span className="text-xs sm:text-sm font-bold uppercase tracking-widest text-blue-400">
+                Contato
+              </span>
+              <h2 className="text-3xl font-black">Fale com a gente</h2>
+              <p className="text-slate-400 text-sm">
+                Tem interesse no projeto ou quer saber mais? Envie uma
+                mensagem.
               </p>
             </div>
 
-            <div className="bg-slate-900/60 border border-slate-800 p-8 rounded-2xl space-y-3">
-              <h3 className="font-bold text-lg text-white">Proposta</h3>
-              <p className="text-slate-300 text-sm leading-relaxed">
-                A solução permitirá registrar ocorrências, acompanhar
-                pendências, definir responsáveis, monitorar indicadores e
-                manter um histórico completo das ações realizadas. Também
-                poderá usar automações e Inteligência Artificial para
-                analisar informações, identificar padrões, gerar alertas,
-                organizar prioridades e auxiliar gestores na tomada de
-                decisão.
-              </p>
-            </div>
-
-            <div className="bg-slate-900/60 border border-slate-800 p-8 rounded-2xl space-y-3 md:col-span-2">
-              <h3 className="font-bold text-lg text-white">
-                Segurança &amp; Governança
-              </h3>
-              <p className="text-slate-300 text-sm leading-relaxed">
-                Todas as ações serão realizadas de forma controlada, com
-                níveis de acesso, registro de atividades, rastreabilidade e
-                fluxos de aprovação quando necessário. A Inteligência
-                Artificial atuará como assistente, fornecendo análises e
-                recomendações, enquanto decisões críticas permanecerão sob
-                responsabilidade dos profissionais autorizados.
-              </p>
-            </div>
+            <ContactForm />
           </div>
 
-          {/* Benefícios */}
-          <div className="space-y-6">
-            <h3 className="text-2xl font-black text-center">Benefícios</h3>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-              {[
-                "Redução do tempo de resposta às ocorrências",
-                "Centralização das informações",
-                "Maior controle sobre atividades e pendências",
-                "Redução de processos manuais e repetitivos",
-                "Aumento da rastreabilidade operacional",
-                "Melhor comunicação entre equipes",
-                "Apoio à tomada de decisões baseada em dados",
-                "Maior visibilidade para gestores e lideranças",
-              ].map((beneficio) => (
-                <div
-                  key={beneficio}
-                  className="bg-slate-900/40 border border-slate-800 p-5 rounded-xl text-sm text-slate-300 leading-relaxed"
-                >
-                  {beneficio}
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Visão */}
-          <div className="bg-slate-900/60 border border-blue-900/40 p-8 sm:p-10 rounded-2xl space-y-3 text-center max-w-3xl mx-auto">
-            <h3 className="font-bold text-lg text-blue-400 uppercase tracking-widest text-sm">
-              Visão
-            </h3>
-            <p className="text-slate-300 text-sm sm:text-base leading-relaxed">
-              A plataforma busca transformar a gestão operacional em um
-              processo mais ágil, integrado, rastreável e orientado por
-              dados, conectando pessoas, processos, informações e
-              automações em um único ambiente. O objetivo não é substituir
-              a gestão humana, mas fornecer às pessoas as informações
-              certas, no momento certo, para que decisões melhores sejam
-              tomadas mais rapidamente.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* ===== CONTACT / FOOTER ===== */}
-      <section
-        id="contact"
-        className="px-6 py-24 bg-slate-900 border-t border-slate-800"
-      >
-        <div className="max-w-xl mx-auto space-y-8">
-          <div className="text-center space-y-2">
-            <span className="text-xs sm:text-sm font-bold uppercase tracking-widest text-blue-400">
-              Contato
-            </span>
-            <h2 className="text-3xl font-black">Fale com a gente</h2>
-            <p className="text-slate-400 text-sm">
-              Tem interesse no projeto ou quer saber mais? Envie uma
-              mensagem.
-            </p>
-          </div>
-
-          <ContactForm />
-        </div>
-
-        <footer className="max-w-5xl mx-auto mt-16 pt-6 border-t border-slate-800 text-center text-xs text-slate-500">
-          © {new Date().getFullYear()} Plataforma de Gestão Operacional.
-        </footer>
-      </section>
+          <footer className="max-w-5xl mx-auto mt-16 pt-6 border-t border-slate-800 text-center text-xs text-slate-500">
+            © {new Date().getFullYear()} Plataforma de Gestão Operacional.
+          </footer>
+        </section>
+      </div>
     </div>
   );
 }
