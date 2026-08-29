@@ -104,7 +104,7 @@ export default function Home() {
           className="group flex w-full max-w-[420px] aspect-[4/3] items-center justify-center overflow-hidden rounded-2xl border border-white/15 bg-neutral-900/40 backdrop-blur-2xl transition-all duration-300 hover:border-white/40 shadow-2xl"
         >
           <img
-            src="/corporate-desk.jpeg"
+            src="https://biuhl.github.io/projeto-viga/public/corporate-environment.jpg"
             alt="Ambiente Corporativo VIGA"
             className="w-full h-full object-cover opacity-90 transition-opacity duration-300 group-hover:opacity-100"
           />
