@@ -31,66 +31,65 @@ export default function ContactForm() {
   };
 
   return (
-    <form
-      ref={formRef}
-      onSubmit={handleSubmit}
-      className="bg-white text-gray-900 p-6 sm:p-8 rounded-2xl shadow-xl border border-gray-200 space-y-4 max-w-xl mx-auto"
-    >
+    <form ref={formRef} onSubmit={handleSubmit} className="space-y-7">
       <div>
-        <label className="block text-xs font-bold uppercase tracking-wider mb-1">
+        <label htmlFor="user_name" className="block text-sm text-slate-500 mb-1.5">
           Nome
         </label>
         <input
+          id="user_name"
           type="text"
           name="user_name"
           required
           placeholder="Seu nome completo"
-          className="w-full px-4 py-2.5 rounded-lg border border-gray-300 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none transition text-sm"
+          className="w-full bg-transparent border-0 border-b border-slate-300 focus:border-blue-600 outline-none transition-colors py-2.5 text-slate-900 placeholder:text-slate-400 rounded-none"
         />
       </div>
 
       <div>
-        <label className="block text-xs font-bold uppercase tracking-wider mb-1">
+        <label htmlFor="user_email" className="block text-sm text-slate-500 mb-1.5">
           E-mail
         </label>
         <input
+          id="user_email"
           type="email"
           name="user_email"
           required
           placeholder="seuemail@exemplo.com"
-          className="w-full px-4 py-2.5 rounded-lg border border-gray-300 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none transition text-sm"
+          className="w-full bg-transparent border-0 border-b border-slate-300 focus:border-blue-600 outline-none transition-colors py-2.5 text-slate-900 placeholder:text-slate-400 rounded-none"
         />
       </div>
 
       <div>
-        <label className="block text-xs font-bold uppercase tracking-wider mb-1">
+        <label htmlFor="message" className="block text-sm text-slate-500 mb-1.5">
           Mensagem
         </label>
         <textarea
+          id="message"
           name="message"
-          rows={4}
+          rows={3}
           required
           placeholder="Escreva sua mensagem..."
-          className="w-full px-4 py-2.5 rounded-lg border border-gray-300 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none transition text-sm"
+          className="w-full bg-transparent border-0 border-b border-slate-300 focus:border-blue-600 outline-none transition-colors py-2.5 text-slate-900 placeholder:text-slate-400 rounded-none resize-none"
         />
       </div>
 
       <button
         type="submit"
         disabled={status === "loading"}
-        className="w-full py-3.5 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-lg transition disabled:opacity-50 disabled:cursor-not-allowed text-sm"
+        className="w-full py-4 bg-[#080B10] hover:bg-blue-600 text-white font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
       >
         {status === "loading" ? "Enviando..." : "Enviar mensagem"}
       </button>
 
       {status === "success" && (
-        <p className="p-3 bg-green-50 border border-green-200 text-green-800 text-xs font-semibold rounded-md text-center">
+        <p className="pl-3 border-l-2 border-emerald-500 text-emerald-700 text-sm">
           Mensagem enviada com sucesso!
         </p>
       )}
 
       {status === "error" && (
-        <p className="p-3 bg-red-50 border border-red-200 text-red-800 text-xs font-semibold rounded-md text-center">
+        <p className="pl-3 border-l-2 border-red-500 text-red-700 text-sm">
           Erro ao enviar. Tente novamente em instantes.
         </p>
       )}

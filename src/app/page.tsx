@@ -116,29 +116,56 @@ export default function Home() {
 </section>
 
         {/* ===== CONTACT / FOOTER ===== */}
-        <section
-          id="contact"
-          className="px-6 py-24 bg-slate-950/80 backdrop-blur-sm border-t border-slate-800"
+<section id="contact" className="relative w-full border-t border-slate-800">
+  <div className="lg:flex lg:h-screen">
+    {/* Esquerda — marca */}
+    <div className="lg:w-[55%] bg-[#080B10] flex flex-col justify-center px-6 sm:px-12 lg:px-20 py-20 lg:py-0">
+      <div className="flex items-center gap-3 text-white mb-10">
+        <svg
+          viewBox="0 0 24 24"
+          width="30"
+          height="30"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2.2"
+          className="shrink-0"
         >
-          <div className="max-w-xl mx-auto space-y-8">
-            <div className="text-center space-y-2">
-              <span className="text-xs sm:text-sm font-bold uppercase tracking-widest text-blue-400">
-                Contato
-              </span>
-              <h2 className="text-3xl font-black">Fale com a gente</h2>
-              <p className="text-slate-400 text-sm">
-                Tem interesse no projeto ou quer saber mais? Envie uma
-                mensagem.
-              </p>
-            </div>
+          <path d="M6 4h12M6 20h12M12 4v16" strokeLinecap="round" />
+        </svg>
+        <span className={`text-2xl tracking-tight ${poppins.className}`}>VIGA</span>
+      </div>
 
-            <ContactForm />
-          </div>
+      <h2
+        className={`max-w-xl text-3xl sm:text-4xl lg:text-5xl leading-[1.15] text-white ${poppins.className}`}
+      >
+        Menos informações perdidas. Decisões acertivas. Operação sob controle.
+      </h2>
 
-          <footer className="max-w-5xl mx-auto mt-16 pt-6 border-t border-slate-800 text-center text-xs text-slate-500">
-            © {new Date().getFullYear()} Plataforma de Gestão Operacional.
-          </footer>
-        </section>
+      <p className="max-w-md mt-6 text-slate-400 text-base sm:text-lg leading-relaxed">
+        A VIGA organiza a rotina de quem toca a produção e de quem responde por
+        ela — feito para lideres, supervisores e gerentes operacionais
+        que decidiram parar de gerenciar tudo pelo WhatsApp.
+      </p>
+    </div>
+
+    {/* Direita — formulário */}
+    <div className="lg:w-[45%] bg-[#F4F5F7] flex flex-col justify-center px-6 sm:px-12 lg:px-16 py-20 lg:py-0">
+      <div className="max-w-md w-full mx-auto lg:mx-0">
+        <h3 className="text-2xl font-bold text-slate-900 mb-1">
+          Fale com a gente
+        </h3>
+        <p className="text-slate-500 text-sm mb-10">
+          Tem interesse no projeto ou quer saber mais? Envie uma mensagem.
+        </p>
+        <ContactForm />
+      </div>
+    </div>
+  </div>
+
+  <footer className="px-6 py-6 border-t border-slate-800 bg-[#080B10] text-center text-xs text-slate-500">
+    © {new Date().getFullYear()} Plataforma de Gestão Operacional.
+  </footer>
+</section>
       </div>
     </div>
   );
