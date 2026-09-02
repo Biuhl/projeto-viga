@@ -50,13 +50,14 @@ export default function Home() {
             </div>
           </div>
         </header>
+        
         {/* ===== SEÇÃO DE IMPACTO*/}
-        <section
+<section
   id="about"
   className="min-h-screen flex flex-col justify-center px-6 sm:px-12 lg:px-20 py-24 text-white"
 >
   <div className="w-full max-w-6xl mx-auto space-y-16">
-    
+
     {/* Cabeçalho discreto */}
     <div className="space-y-2 text-left">
       <span className="text-xs sm:text-sm font-bold uppercase tracking-widest text-emerald-400 font-mono">
@@ -69,27 +70,27 @@ export default function Home() {
 
     {/* Grid: Frases mais limpas e espaçadas + Imagem */}
     <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
-      
-      {/* Lado Esquerdo: Frases mais sutis, menores e com bastante respiro */}
+
+      {/* Lado Esquerdo: Frases em caixa alta, levemente maiores no mobile */}
       <div className={`lg:col-span-7 space-y-10 sm:space-y-12 text-left ${poppins.className}`}>
-        
+
         <div className="space-y-1">
           <span className="text-xs font-mono text-emerald-400/80 uppercase tracking-wider">01</span>
-          <h1 className="text-xl sm:text-4xl lg:text-6xl font-bold text-white tracking-tight leading-snug select-none cursor-default hover:translate-x-2 transition-transform duration-300">
+          <h1 className="text-2xl sm:text-4xl lg:text-6xl font-bold text-white uppercase tracking-tight leading-[1.1] select-none cursor-default hover:translate-x-2 transition-transform duration-300">
             Estatísticas operacionais
           </h1>
         </div>
 
         <div className="space-y-1">
           <span className="text-xs font-mono text-blue-400/80 uppercase tracking-wider">02</span>
-          <h1 className="text-xl sm:text-4xl lg:text-6xl font-bold text-white tracking-tight leading-snug select-none cursor-default hover:translate-x-2 transition-transform duration-300">
+          <h1 className="text-2xl sm:text-4xl lg:text-6xl font-bold text-white uppercase tracking-tight leading-[1.1] select-none cursor-default hover:translate-x-2 transition-transform duration-300">
             Passagem de Turnos
           </h1>
         </div>
 
         <div className="space-y-1">
           <span className="text-xs font-mono text-purple-400/80 uppercase tracking-wider">03</span>
-          <h1 className="text-xl sm:text-4xl lg:text-6xl font-bold text-white tracking-tight leading-snug select-none cursor-default hover:translate-x-2 transition-transform duration-300">
+          <h1 className="text-2xl sm:text-4xl lg:text-6xl font-bold text-white uppercase tracking-tight leading-[1.1] select-none cursor-default hover:translate-x-2 transition-transform duration-300">
             Tomada de decisão assertiva
           </h1>
         </div>
@@ -104,10 +105,10 @@ export default function Home() {
           className="group flex w-full max-w-[420px] aspect-[4/3] items-center justify-center overflow-hidden rounded-2xl border border-white/15 bg-neutral-900/40 backdrop-blur-2xl transition-all duration-300 hover:border-white/40 shadow-2xl"
         >
           <img
-          src={`${process.env.NEXT_PUBLIC_BASE_PATH}/corporate-desk.jpeg`}
-          alt="Ambiente Corporativo VIGA"
-          className="w-full h-full object-cover opacity-90 transition-opacity duration-300 group-hover:opacity-100"
-        />
+            src={`${process.env.NEXT_PUBLIC_BASE_PATH}/corporate-desk.jpeg`}
+            alt="Ambiente Corporativo VIGA"
+            className="w-full h-full object-cover opacity-90 transition-opacity duration-300 group-hover:opacity-100"
+          />
         </a>
       </div>
 
