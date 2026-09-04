@@ -1,6 +1,7 @@
 import ContactForm from "@/components/ContactForm";
 import SpaceBackground from "@/components/spaceBackground";
 import { Poppins } from "next/font/google";
+import { RequestAccessButton, ConhecerProjetoButton } from '@/components/HeroButtons';
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -35,22 +36,11 @@ export default function Home() {
             </ol>
 
             <div className="flex flex-col sm:flex-row items-center gap-5 pt-3">
-              <a
-                href="#contact"
-                className="rounded-lg bg-white text-black px-7 py-3.5 text-base sm:text-lg font-medium hover:bg-green-500 hover:text-white transition-colors"
-              >
-                SOLICITAR ACESSO!
-              </a>
-              <a
-                href="#about"
-                className="rounded-lg border border-white/20 px-7 py-3.5 text-base sm:text-lg font-medium hover:bg-white hover:text-black transition-colors"
-              >
-                CONHECER O PROJETO...
-              </a>
+              <RequestAccessButton />
+              <ConhecerProjetoButton />
             </div>
           </div>
         </header>
-        
         {/* ===== SEÇÃO DE IMPACTO*/}
 <section
   id="about"
