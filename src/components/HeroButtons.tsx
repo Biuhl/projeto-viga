@@ -2,7 +2,12 @@ import styles from './HeroButtons.module.css';
 
 export function RequestAccessButton() {
   return (
-    <a href="/cadastro" className={styles['request-access']}>
+    <a
+      href="/login"
+      target="_blank"
+      rel="noopener noreferrer"
+      className={styles['request-access']}
+    >
       <div>
         <div className={styles.lock}>
           <div className={styles.shackle}></div>
