@@ -28,12 +28,12 @@ export default function Home() {
               VIGA
             </div>
 
-            <ol className="font-mono text-lg sm:text-2xl text-left list-decimal list-inside leading-relaxed text-white/90 space-y-1">
-              PLATAFORMA DE{" "}
-              <span className="bg-white/10 px-2 py-1 rounded font-mono">
+              <p className="font-mono text-2xl sm:text-3xl md:text-4xl text-center leading-relaxed text-white/90">
+                PLATAFORMA DE{" "}
+                <span className="bg-white/10 px-2 py-1 rounded font-mono">
                 GESTÃO OPERACIONAL
-              </span>
-            </ol>
+                </span>
+              </p>
 
             <div className="flex flex-col sm:flex-row items-center gap-5 pt-3">
               <RequestAccessButton />
