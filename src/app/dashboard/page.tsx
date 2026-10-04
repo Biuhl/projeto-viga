@@ -1,8 +1,9 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { auth } from "@/lib/firebase";
+import { auth, db, type UserProfile } from "@/lib/firebase";
 import { onAuthStateChanged, signOut, type User } from "firebase/auth";
+import { doc, getDoc } from "firebase/firestore";
 
 const producaoSemanal = [
   { dia: "Seg", producao: 1240 },
@@ -52,18 +53,41 @@ const ocorrencias = [
   },
 ];
 
+// Rótulos bonitos para exibir o cargo na tela.
+const rotuloCargo: Record<string, string> = {
+  lider: "Líder",
+  supervisor: "Supervisor",
+  gerente: "Gerente operacional",
+};
+
 export default function DashboardPage() {
   const [usuario, setUsuario] = useState<User | null>(null);
+  const [perfil, setPerfil] = useState<UserProfile | null>(null);
   const [carregando, setCarregando] = useState(true);
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      if (user) {
-        setUsuario(user);
-        setCarregando(false);
-      } else {
+    const unsubscribe = onAuthStateChanged(auth, async (user) => {
+      if (!user) {
         window.location.href = "/login";
+        return;
       }
+
+      setUsuario(user);
+
+      // Busca o perfil do usuário no Firestore usando o uid como ID do doc.
+      try {
+        const snap = await getDoc(doc(db, "users", user.uid));
+        if (snap.exists()) {
+          setPerfil(snap.data() as UserProfile);
+        } else {
+          setPerfil(null);
+        }
+      } catch (err) {
+        console.error("[dashboard] erro ao ler perfil:", err);
+        setPerfil(null);
+      }
+
+      setCarregando(false);
     });
 
     return () => unsubscribe();
@@ -98,10 +122,35 @@ export default function DashboardPage() {
             </span>
 
             <h1 className="mt-2 text-2xl font-bold">
-              Olá, {usuario?.displayName || usuario?.email}
+              Olá, {perfil?.nome || usuario?.displayName || usuario?.email}
             </h1>
 
-            <p className="mt-1 text-sm text-zinc-500">
+            {/* BADGE DE CARGO + SETOR (novo) */}
+            <div className="mt-2 flex flex-wrap items-center gap-2">
+              {perfil ? (
+                <>
+                  <span className="inline-flex items-center rounded-full border border-blue-900/60 bg-blue-950/40 px-3 py-0.5 text-[11px] font-semibold uppercase tracking-wider text-blue-300">
+                    {rotuloCargo[perfil.cargo] ?? perfil.cargo}
+                  </span>
+                  {perfil.setor && (
+                    <span className="inline-flex items-center rounded-full border border-zinc-700 bg-zinc-900 px-3 py-0.5 text-[11px] text-zinc-400">
+                      {perfil.setor}
+                    </span>
+                  )}
+                  {!perfil.ativo && (
+                    <span className="inline-flex items-center rounded-full border border-red-900/60 bg-red-950/40 px-3 py-0.5 text-[11px] font-semibold text-red-300">
+                      Inativo
+                    </span>
+                  )}
+                </>
+              ) : (
+                <span className="inline-flex items-center rounded-full border border-yellow-900/60 bg-yellow-950/40 px-3 py-0.5 text-[11px] font-semibold text-yellow-300">
+                  Perfil incompleto — contate o administrador
+                </span>
+              )}
+            </div>
+
+            <p className="mt-2 text-sm text-zinc-500">
               Visão geral da operação
             </p>
           </div>

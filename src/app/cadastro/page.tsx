@@ -2,12 +2,23 @@
 
 import { useState, FormEvent } from "react";
 import Link from "next/link";
-import { auth } from "@/lib/firebase";
-import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import {
+  auth,
+  db,
+  isCargoValido,
+  type Cargo,
+  type UserProfile,
+} from "@/lib/firebase";
+import {
+  createUserWithEmailAndPassword,
+  updateProfile,
+  deleteUser,
+} from "firebase/auth";
+import { doc, setDoc, serverTimestamp } from "firebase/firestore";
 
 export default function CadastroPage() {
   const [nome, setNome] = useState("");
-  const [cargo, setCargo] = useState("supervisor");
+  const [cargo, setCargo] = useState<Cargo>("supervisor");
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
   const [carregando, setCarregando] = useState(false);
@@ -27,27 +38,59 @@ export default function CadastroPage() {
   }
 
   async function handleCadastro(e: FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    setCarregando(true);
-    setErro("");
+  e.preventDefault();
+  setCarregando(true);
+  setErro("");
 
-    const emailLimpo = email.trim().toLowerCase();
+  const emailLimpo = email.trim().toLowerCase();
+  const nomeLimpo = nome.trim();
 
-    try {
-      const credencial = await createUserWithEmailAndPassword(auth, emailLimpo, senha);
-
-      if (nome.trim()) {
-        await updateProfile(credencial.user, {
-          displayName: nome.trim(),
-        });
-      }
-
-      window.location.href = "/dashboard";
-    } catch (err: any) {
-      setErro(traduzErroFirebase(err.code));
-      setCarregando(false);
-    }
+  if (!isCargoValido(cargo)) {
+    setErro("Cargo inválido.");
+    setCarregando(false);
+    return;
   }
+
+  console.log("[1] antes de createUser");
+  let credencialCriada = null;
+  try {
+    credencialCriada = await createUserWithEmailAndPassword(auth, emailLimpo, senha);
+    console.log("[2] Auth criado:", credencialCriada.user.uid);
+
+    if (nomeLimpo) {
+      console.log("[3] antes de updateProfile");
+      await updateProfile(credencialCriada.user, { displayName: nomeLimpo });
+      console.log("[4] updateProfile ok");
+    }
+
+    const perfil: UserProfile = {
+      nome: nomeLimpo,
+      email: emailLimpo,
+      cargo,
+      setor: "",
+      linha: "",
+      equipe: "",
+      ativo: true,
+    };
+    
+    await setDoc(doc(db, "users", credencialCriada.user.uid), {
+      ...perfil,
+      criadoEm: serverTimestamp(),
+      atualizadoEm: serverTimestamp(),
+    });
+    console.log("[6] setDoc ok");
+
+    console.log("[7] redirecionando");
+    window.location.href = "/dashboard";
+  } catch (err: any) {
+    console.error("[ERRO]", err.code, err.message, err);
+    if (credencialCriada?.user) {
+      try { await deleteUser(credencialCriada.user); } catch (e) { console.warn("rollback falhou", e); }
+    }
+    setErro(traduzErroFirebase(err.code));
+    setCarregando(false);
+  }
+}
 
   return (
     <main className="flex min-h-screen items-center justify-center bg-zinc-950 px-6">
@@ -59,7 +102,9 @@ export default function CadastroPage() {
           ← Voltar
         </Link>
 
-        <h1 className="mt-4 text-2xl font-bold text-white">Criar conta no VIGA</h1>
+        <h1 className="mt-4 text-2xl font-bold text-white">
+          Criar conta no VIGA
+        </h1>
         <p className="mt-1 text-sm text-zinc-400">
           Cadastre seu acesso operacional.
         </p>
@@ -85,7 +130,10 @@ export default function CadastroPage() {
             </label>
             <select
               value={cargo}
-              onChange={(e) => setCargo(e.target.value)}
+              onChange={(e) => {
+                const valor = e.target.value;
+                if (isCargoValido(valor)) setCargo(valor);
+              }}
               className="mt-1.5 w-full rounded-lg border border-zinc-700 bg-zinc-800 px-4 py-3 text-sm text-white outline-none transition focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
             >
               <option value="lider">Líder</option>
