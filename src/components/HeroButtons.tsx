@@ -3,7 +3,7 @@ import styles from './HeroButtons.module.css';
 export function RequestAccessButton() {
   return (
     <a
-      href="/projeto-viga/login"
+      href="projeto-viga/login"
       className={styles['request-access']}
     >
       <div>
