@@ -1,10 +1,12 @@
-import styles from './HeroButtons.module.css';
+import styles from "./HeroButtons.module.css";
+
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 
 export function RequestAccessButton() {
   return (
     <a
-      href="/projeto-viga/login"
-      className={styles['request-access']}
+      href={`${basePath}/login`}
+      className={styles["request-access"]}
     >
       <div>
         <div className={styles.lock}>

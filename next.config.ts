@@ -5,7 +5,7 @@ const basePath = isProd ? "/projeto-viga" : "";
 
 const nextConfig: NextConfig = {
   output: "export",
-  basePath: basePath,
+  basePath,
   images: {
     unoptimized: true,
   },
