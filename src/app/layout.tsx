@@ -17,9 +17,6 @@ const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 export const metadata: Metadata = {
   title: "Plataforma de Gestão Operacional",
   description: "Centralize, organize e acompanhe sua rotina operacional.",
-  icons: {
-    icon: `${basePath}/favicon.ico`,
-  },
 };
 
 export default function RootLayout({
